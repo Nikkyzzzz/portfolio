@@ -1,6 +1,8 @@
 export default {
   async fetch(request, env) {
-    const allowedOrigin = env.ALLOWED_ORIGIN || "*";
+    const requestOrigin = request.headers.get("Origin") || "";
+    const configuredOrigin = normalizeOrigin(env.ALLOWED_ORIGIN || "");
+    const allowedOrigin = resolveAllowedOrigin(requestOrigin, configuredOrigin);
 
     if (request.method === "OPTIONS") {
       return new Response(null, {
@@ -76,6 +78,23 @@ function corsHeaders(origin) {
     "Access-Control-Allow-Methods": "POST, OPTIONS",
     "Access-Control-Allow-Headers": "Content-Type"
   };
+}
+
+function normalizeOrigin(value) {
+  if (!value) return "";
+  try {
+    return new URL(value).origin;
+  } catch (error) {
+    return value;
+  }
+}
+
+function resolveAllowedOrigin(requestOrigin, configuredOrigin) {
+  if (configuredOrigin) {
+    if (requestOrigin && requestOrigin === configuredOrigin) return requestOrigin;
+    return configuredOrigin;
+  }
+  return requestOrigin || "*";
 }
 
 function json(payload, status, origin) {

@@ -436,7 +436,16 @@ async function initAssistantWidget() {
         })
       });
 
-      if (!response.ok) throw new Error("AI call failed");
+      if (!response.ok) {
+        let reason = `HTTP ${response.status}`;
+        try {
+          const errData = await response.json();
+          reason = errData?.error || errData?.details || reason;
+        } catch (parseError) {
+          // Keep default reason.
+        }
+        throw new Error(reason);
+      }
 
       const data = await response.json();
       const content = data?.reply?.trim() || data?.message?.trim() || data?.text?.trim();
@@ -445,7 +454,8 @@ async function initAssistantWidget() {
       history.push({ role: "assistant", content: reply });
       addMessage("bot", reply);
     } catch (error) {
-      addMessage("bot", `${getLocalAssistantReply(prompt)} (Live API unavailable, fallback mode used.)`);
+      const reason = error instanceof Error ? error.message : "Unknown error";
+      addMessage("bot", `${getLocalAssistantReply(prompt)} (Live API unavailable: ${reason})`);
     }
   });
 }
