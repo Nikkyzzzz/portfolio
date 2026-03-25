@@ -18,7 +18,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      GITHUB_URL: ${{ secrets.GITHUB_URL }}
+      PROFILE_GITHUB_URL: ${{ secrets.PROFILE_GITHUB_URL }}
       LINKEDIN_URL: ${{ secrets.LINKEDIN_URL }}
       PROJECT_AUDIT_URL: ${{ secrets.PROJECT_AUDIT_URL }}
       PROJECT_PAN_URL: ${{ secrets.PROJECT_PAN_URL }}
@@ -37,7 +37,7 @@ jobs:
         run: |
           cat > config.js <<EOF
           window.RUNTIME_CONFIG = {
-            GITHUB_URL: "${GITHUB_URL}",
+            GITHUB_URL: "${PROFILE_GITHUB_URL}",
             LINKEDIN_URL: "${LINKEDIN_URL}",
             PROJECT_AUDIT_URL: "${PROJECT_AUDIT_URL}",
             PROJECT_PAN_URL: "${PROJECT_PAN_URL}",

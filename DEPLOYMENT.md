@@ -21,7 +21,7 @@ For worker deploy:
 
 For pages deploy:
 - CHAT_API_URL (example: https://nikita-portfolio-chat-proxy.<subdomain>.workers.dev/api/chat)
-- GITHUB_URL
+- PROFILE_GITHUB_URL
 - LINKEDIN_URL
 - PROJECT_AUDIT_URL
 - PROJECT_PAN_URL
