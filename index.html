@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nikita Patra | AI/ML Engineer Portfolio</title>
+  <meta name="description" content="Nikita Patra - AI/ML Engineer | LLM & RAG Specialist portfolio" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="cursor-glow" id="cursorGlow"></div>
+  <div class="scroll-progress" id="scrollProgress"></div>
+  <canvas id="bgCanvas" aria-hidden="true"></canvas>
+
+  <header class="navbar glass">
+    <a href="#hero" class="brand">NP<span>.ai</span></a>
+    <nav>
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#experience">Experience</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="nav-actions">
+      <a class="btn btn-small" href="Nikita_Patra_AI_Engineer.pdf" download>
+        <i class="fa-solid fa-file-arrow-down"></i> Resume
+      </a>
+      <button id="themeToggle" class="theme-toggle" aria-label="Toggle theme">
+        <i class="fa-solid fa-moon" aria-hidden="true"></i>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <section id="hero" class="hero section">
+      <div class="hero-content reveal">
+        <p class="eyebrow">AI Systems | Generative Intelligence | Automation</p>
+        <h1 id="heroName" class="hero-seq-item">Nikita Patra</h1>
+        <h2>AI/ML Engineer <span>|</span> LLM &amp; RAG Specialist</h2>
+        <p class="tagline">Building intelligent systems powered by data and language models.</p>
+        <p class="typing-line">&gt; <span id="typingText"></span><span class="caret">|</span></p>
+        <div class="hero-cta">
+          <a class="btn" href="#projects">View Projects</a>
+          <a class="btn btn-ghost" href="#contact">Contact Me</a>
+        </div>
+      </div>
+      <div class="hero-visual reveal">
+        <div id="heroMetrics" class="hero-panel glass hero-seq-item">
+          <h3>Live Impact Snapshot</h3>
+          <div class="metric-grid">
+            <article>
+              <h4>25+</h4>
+              <p>AI Bots Built</p>
+            </article>
+            <article>
+              <h4>500K+</h4>
+              <p>Records Processed</p>
+            </article>
+            <article>
+              <h4>60%</h4>
+              <p>Audit Time Reduced</p>
+            </article>
+            <article>
+              <h4>94%</h4>
+              <p>Model Accuracy</p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="section">
+      <div class="section-head reveal">
+        <p class="section-label">About</p>
+        <h2>Engineering intelligence into real-world products</h2>
+      </div>
+      <div class="about-grid">
+        <article class="about-card glass reveal">
+          <i class="fa-solid fa-brain"></i>
+          <h3>AI/ML Engineer</h3>
+          <p>Hands-on in LLM workflows, RAG pipelines, predictive systems, and production-ready automation tools.</p>
+        </article>
+        <article class="about-card glass reveal">
+          <i class="fa-solid fa-clock-rotate-left"></i>
+          <h3>7+ Months Experience</h3>
+          <p>Delivered impactful internship projects with measurable business outcomes and scalable architecture.</p>
+        </article>
+        <article class="about-card glass reveal">
+          <i class="fa-solid fa-building"></i>
+          <h3>Capitall &amp; LTM</h3>
+          <p>Experience collaborating across data, product, and engineering teams to drive AI-first initiatives.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="skills" class="section">
+      <div class="section-head reveal">
+        <p class="section-label">Skills</p>
+        <h2>Technology stack and domain depth</h2>
+      </div>
+      <div class="skills-grid">
+        <article class="skill-card glass reveal">
+          <h3><i class="fa-solid fa-code"></i> Programming</h3>
+          <div class="chip-wrap">
+            <span>Python</span>
+            <span>SQL</span>
+            <span>JavaScript</span>
+          </div>
+        </article>
+        <article class="skill-card glass reveal">
+          <h3><i class="fa-solid fa-microchip"></i> AI/ML</h3>
+          <div class="chip-wrap">
+            <span>Machine Learning</span>
+            <span>Deep Learning</span>
+            <span>NLP</span>
+            <span>Transformers</span>
+            <span>LLMs</span>
+            <span>RAG</span>
+          </div>
+        </article>
+        <article class="skill-card glass reveal">
+          <h3><i class="fa-solid fa-layer-group"></i> Frameworks</h3>
+          <div class="chip-wrap">
+            <span>PyTorch</span>
+            <span>Scikit-learn</span>
+            <span>LangChain</span>
+            <span>FastAPI</span>
+          </div>
+        </article>
+        <article class="skill-card glass reveal">
+          <h3><i class="fa-solid fa-screwdriver-wrench"></i> Tools</h3>
+          <div class="chip-wrap">
+            <span>Docker</span>
+            <span>Git</span>
+            <span>Streamlit</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="projects" class="section">
+      <div class="section-head reveal">
+        <p class="section-label">Projects</p>
+        <h2>High-impact AI systems built for real outcomes</h2>
+      </div>
+      <div class="project-grid">
+        <article class="project-card glass reveal" data-project="audit">
+          <h3>Audit Automation Platform</h3>
+          <p>AI-powered audit platform with anomaly detection and intelligent workflow automation.</p>
+          <p class="stack">Python • FastAPI • LangChain • SQL</p>
+          <div class="project-actions">
+            <button class="btn btn-small open-modal">Details</button>
+            <a class="btn btn-small btn-ghost project-link" data-project-link="audit" href="#" target="_blank" rel="noopener">GitHub</a>
+          </div>
+        </article>
+
+        <article class="project-card glass reveal" data-project="pan">
+          <h3>PAN Card Reader</h3>
+          <p>OCR + LLM based extraction pipeline for identity document parsing and validation.</p>
+          <p class="stack">Python • OCR • LLM • FastAPI</p>
+          <div class="project-actions">
+            <button class="btn btn-small open-modal">Details</button>
+            <a class="btn btn-small btn-ghost project-link" data-project-link="pan" href="#" target="_blank" rel="noopener">GitHub</a>
+          </div>
+        </article>
+
+        <article class="project-card glass reveal" data-project="lung">
+          <h3>Lung Cancer Detection</h3>
+          <p>Vision Transformer + CCT model for medical imaging diagnostics with 94% accuracy.</p>
+          <p class="stack">PyTorch • ViT • CCT • Computer Vision</p>
+          <div class="project-actions">
+            <button class="btn btn-small open-modal">Details</button>
+            <a class="btn btn-small btn-ghost project-link" data-project-link="lung" href="#" target="_blank" rel="noopener">GitHub</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="experience" class="section">
+      <div class="section-head reveal">
+        <p class="section-label">Experience</p>
+        <h2>Professional journey</h2>
+      </div>
+      <div class="timeline">
+        <article class="timeline-item glass reveal">
+          <span class="dot"></span>
+          <h3>AI/ML Engineer Intern - Capitall</h3>
+          <p>Built and deployed 25+ AI bots across operational workflows and risk analysis functions.</p>
+          <ul>
+            <li>Processed and analyzed 500K+ records using automated ML-driven pipelines.</li>
+            <li>Reduced manual audit time by 60% through anomaly detection and AI assistants.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section id="certifications" class="section">
+      <div class="section-head reveal">
+        <p class="section-label">Certifications</p>
+        <h2>Credentials and continuous learning</h2>
+      </div>
+      <div class="cert-grid">
+        <article class="cert-card glass reveal">
+          <i class="fa-solid fa-certificate"></i>
+          <h3>IBM AI Fundamentals</h3>
+        </article>
+        <article class="cert-card glass reveal">
+          <i class="fa-solid fa-chart-line"></i>
+          <h3>Data Analytics</h3>
+        </article>
+        <article class="cert-card glass reveal">
+          <i class="fa-solid fa-network-wired"></i>
+          <h3>Cisco Networking</h3>
+        </article>
+      </div>
+    </section>
+
+    <section id="contact" class="section">
+      <div class="section-head reveal">
+        <p class="section-label">Contact</p>
+        <h2>Let us build something intelligent together</h2>
+      </div>
+      <div class="contact-wrap">
+        <form id="contactForm" class="contact-form glass reveal">
+          <label for="name">Name</label>
+          <input id="name" name="name" type="text" placeholder="Your name" required />
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" placeholder="Your email" required />
+          <label for="message">Message</label>
+          <textarea id="message" name="message" rows="5" placeholder="Tell me about your project" required></textarea>
+          <input type="hidden" name="_subject" value="Portfolio Contact Form Message" />
+          <button type="submit" class="btn">Send Message</button>
+          <p id="contactStatus" class="contact-status" aria-live="polite"></p>
+        </form>
+
+        <article class="contact-info glass reveal">
+          <h3>Connect</h3>
+          <p><i class="fa-solid fa-envelope"></i> <a href="mailto:patranikita@gmail.com">patranikita@gmail.com</a></p>
+          <div class="socials">
+            <a id="linkedinLink" href="#" aria-label="LinkedIn" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin-in"></i></a>
+            <a id="githubLink" href="#" aria-label="GitHub" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i></a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="assistant" class="section">
+      <div class="section-head reveal">
+        <p class="section-label">AI Assistant</p>
+        <h2>Talk to my portfolio assistant</h2>
+      </div>
+      <article class="assistant-card glass reveal">
+        <div class="assistant-toolbar">
+          <p>Ask about my skills, projects, experience, and impact.</p>
+          <div class="assistant-toolbar-actions">
+            <button id="clearAiChatBtn" class="btn btn-small btn-ghost" type="button">Clear</button>
+          </div>
+        </div>
+        <div id="assistantMessages" class="assistant-messages" aria-live="polite"></div>
+        <form id="assistantForm" class="assistant-form">
+          <input id="assistantInput" type="text" placeholder="Ask something about Nikita Patra..." required />
+          <button type="submit" class="btn btn-small">Ask AI</button>
+        </form>
+      </article>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>&copy; <span id="year"></span> Nikita Patra. All rights reserved.</p>
+    <p>Built with ❤ using React / Next.js aesthetics in HTML, CSS & JS</p>
+  </footer>
+
+  <div class="modal" id="projectModal" aria-hidden="true">
+    <div class="modal-content glass">
+      <button class="modal-close" id="modalClose" aria-label="Close project details">&times;</button>
+      <h3 id="modalTitle"></h3>
+      <p id="modalDescription"></p>
+      <p id="modalStack" class="stack"></p>
+    </div>
+  </div>
+
+  <script src="config.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,64 @@
+name: Deploy GitHub Pages
+
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      GITHUB_URL: ${{ secrets.GITHUB_URL }}
+      LINKEDIN_URL: ${{ secrets.LINKEDIN_URL }}
+      PROJECT_AUDIT_URL: ${{ secrets.PROJECT_AUDIT_URL }}
+      PROJECT_PAN_URL: ${{ secrets.PROJECT_PAN_URL }}
+      PROJECT_LUNG_URL: ${{ secrets.PROJECT_LUNG_URL }}
+      FORMSPREE_ENDPOINT: ${{ secrets.FORMSPREE_ENDPOINT }}
+      CHAT_API_URL: ${{ secrets.CHAT_API_URL }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      - name: Generate runtime config from secrets
+        shell: bash
+        run: |
+          cat > config.js <<EOF
+          window.RUNTIME_CONFIG = {
+            GITHUB_URL: "${GITHUB_URL}",
+            LINKEDIN_URL: "${LINKEDIN_URL}",
+            PROJECT_AUDIT_URL: "${PROJECT_AUDIT_URL}",
+            PROJECT_PAN_URL: "${PROJECT_PAN_URL}",
+            PROJECT_LUNG_URL: "${PROJECT_LUNG_URL}",
+            FORMSPREE_ENDPOINT: "${FORMSPREE_ENDPOINT}",
+            CHAT_API_URL: "${CHAT_API_URL}"
+          };
+          EOF
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
