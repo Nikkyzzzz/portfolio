@@ -50,7 +50,7 @@ export default {
         { role: "user", content: message }
       ];
 
-      const model = env.COHERE_MODEL || "command-r";
+      const model = env.COHERE_MODEL || "command-r-plus-08-2024";
 
       const cohereResponse = await fetch("https://api.cohere.com/v2/chat", {
         method: "POST",
