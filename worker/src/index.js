@@ -41,10 +41,8 @@ export default {
         }));
 
       const retrievedChunks = retrieveResumeChunks(message, 4);
-      if (!retrievedChunks.length) {
-        return json({ reply: "I could not find that in the resume." }, 200, allowedOrigin);
-      }
-
+      
+      // Always format context (retrieval now guarantees chunks)
       const resumeContext = formatResumeContext(retrievedChunks);
 
       const messages = [
@@ -206,43 +204,37 @@ const RESUME_CHUNKS = [
 ];
 
 function retrieveResumeChunks(query, limit) {
-  const queryLower = query.toLowerCase();
-  
   // Always return summary as base
-  const result = [RESUME_CHUNKS.find(c => c.id === "summary")];
+  const chunks = [RESUME_CHUNKS.find(c => c.id === "summary")];
   
-  // Intent-based retrieval
-  if (/work|experience|job|intern|role|capitall/i.test(query)) {
-    result.push(RESUME_CHUNKS.find(c => c.id === "work_experience"));
+  // Add work experience for common questions
+  chunks.push(RESUME_CHUNKS.find(c => c.id === "work_experience"));
+  
+  // Based on query intent, add more chunks
+  if (/project|build|develop|audit|pan|cancer|lung/i.test(query)) {
+    chunks.push(...RESUME_CHUNKS.filter(c => c.id.startsWith("project")));
   }
   
-  if (/project|build|built|develop|audit|pan|cancer|lung/i.test(query)) {
-    RESUME_CHUNKS.filter(c => c.id.includes("project")).forEach(c => result.push(c));
+  if (/skill|language|framework|python|ai|ml|rag|tool|technology/i.test(query)) {
+    chunks.push(...RESUME_CHUNKS.filter(c => c.id.startsWith("skill")));
   }
   
-  if (/skill|language|framework|technology|expert|python|java|ai|ml|rag/i.test(query)) {
-    RESUME_CHUNKS.filter(c => c.id.includes("skill")).forEach(c => result.push(c));
+  if (/education|study|degree|university|bachelor|school|graduated/i.test(query)) {
+    chunks.push(RESUME_CHUNKS.find(c => c.id === "education"));
   }
   
-  if (/education|study|degree|university|bachelor|school|graduated|studied/i.test(query)) {
-    result.push(RESUME_CHUNKS.find(c => c.id === "education"));
+  if (/certificate|certif/i.test(query)) {
+    chunks.push(RESUME_CHUNKS.find(c => c.id === "certifications"));
   }
   
-  if (/certificate|certif|qualify|certified/i.test(query)) {
-    result.push(RESUME_CHUNKS.find(c => c.id === "certifications"));
+  if (/contact|email|phone|linkedin|github/i.test(query)) {
+    chunks.push(RESUME_CHUNKS.find(c => c.id === "contact"));
   }
   
-  if (/contact|email|phone|linkedin|github|reach|connect|call/i.test(query)) {
-    result.push(RESUME_CHUNKS.find(c => c.id === "contact"));
-  }
+  // Filter out undefined and duplicates
+  const filtered = chunks.filter((c, i) => c && chunks.indexOf(c) === i);
   
-  // Remove duplicates and undefined entries
-  const unique = [...new Set(result.filter(c => c))];
-  
-  // Return top chunks, but always return at least summary
-  return unique.slice(0, limit).length > 0 
-    ? unique.slice(0, limit)
-    : [RESUME_CHUNKS.find(c => c.id === "summary")];
+  return filtered.length > 0 ? filtered : [RESUME_CHUNKS.find(c => c.id === "summary")];
 }
 
 function tokenize(text) {
