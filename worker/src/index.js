@@ -40,7 +40,15 @@ export default {
           content: item.content
         }));
 
-      cohereMessages.push({ role: "user", content: message });
+      const messages = [
+        {
+          role: "system",
+          content:
+            "You are an assistant for Nikita Patra portfolio website. Answer briefly and only about her skills, experience, projects, certifications, and contact details."
+        },
+        ...cohereMessages,
+        { role: "user", content: message }
+      ];
 
       const cohereResponse = await fetch("https://api.cohere.com/v2/chat", {
         method: "POST",
@@ -50,9 +58,7 @@ export default {
         },
         body: JSON.stringify({
           model: "command-r-plus",
-          preamble:
-            "You are an assistant for Nikita Patra portfolio website. Answer briefly and only about her skills, experience, projects, certifications, and contact details.",
-          messages: cohereMessages,
+          messages,
           temperature: 0.4
         })
       });
