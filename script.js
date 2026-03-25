@@ -396,7 +396,7 @@ async function initAssistantWidget() {
     messages.scrollTop = messages.scrollHeight;
   };
 
-  addMessage("bot", "Hello, I am your AI assistant. Ask me anything about Nikita's portfolio.");
+  addMessage("bot", "Hello, I am your resume assistant. I only answer from Nikita's resume details.");
 
   if (!chatApiUrl) {
     addMessage("bot", "Live API unavailable. Using local assistant mode.");

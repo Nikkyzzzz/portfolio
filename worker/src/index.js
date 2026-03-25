@@ -40,13 +40,20 @@ export default {
           content: item.content
         }));
 
+      const retrievedChunks = retrieveResumeChunks(message, 4);
+      if (!retrievedChunks.length) {
+        return json({ reply: "I could not find that in the resume." }, 200, allowedOrigin);
+      }
+
+      const resumeContext = formatResumeContext(retrievedChunks);
+
       const messages = [
         {
           role: "system",
           content:
-            "You are an assistant for Nikita Patra portfolio website. Answer briefly and only about her skills, experience, projects, certifications, and contact details."
+            "You are a resume-grounded assistant. Use only the supplied Resume Context. If the answer is not explicitly present in Resume Context, respond exactly: 'I could not find that in the resume.' Do not guess, infer, or add outside facts. Keep answers concise.\n\nResume Context:\n" + resumeContext
         },
-        ...cohereMessages,
+        ...cohereMessages.slice(-8),
         { role: "user", content: message }
       ];
 
@@ -86,6 +93,102 @@ function corsHeaders(origin) {
     "Access-Control-Allow-Methods": "POST, OPTIONS",
     "Access-Control-Allow-Headers": "Content-Type"
   };
+}
+
+const RESUME_CHUNKS = [
+  {
+    id: "summary",
+    text:
+      "Nikita Patra is an AI/ML Engineer focused on LLM workflows, RAG pipelines, and automation systems."
+  },
+  {
+    id: "experience_capitall",
+    text:
+      "Experience includes AI/ML Engineer Intern at Capitall where she built 25+ AI bots, processed 500K+ records, and reduced audit time by 60%."
+  },
+  {
+    id: "experience_ltm",
+    text:
+      "Resume mentions experience with Capitall and LTM in AI-focused project execution and collaboration."
+  },
+  {
+    id: "project_audit",
+    text:
+      "Project: Audit Automation Platform, an AI-powered audit system with anomaly detection and workflow automation."
+  },
+  {
+    id: "project_pan",
+    text:
+      "Project: PAN Card Reader using OCR plus LLM-based extraction and validation of PAN details."
+  },
+  {
+    id: "project_lung",
+    text:
+      "Project: Lung Cancer Detection using Vision Transformer and CCT model with around 94% accuracy."
+  },
+  {
+    id: "skills_programming",
+    text:
+      "Programming skills include Python, SQL, and JavaScript."
+  },
+  {
+    id: "skills_ai",
+    text:
+      "AI/ML skills include machine learning, deep learning, NLP, transformers, LLMs, and RAG."
+  },
+  {
+    id: "skills_frameworks",
+    text:
+      "Frameworks include PyTorch, Scikit-learn, LangChain, and FastAPI."
+  },
+  {
+    id: "skills_tools",
+    text:
+      "Tools include Docker, Git, and Streamlit."
+  },
+  {
+    id: "certifications",
+    text:
+      "Certifications include IBM AI Fundamentals, Data Analytics, and Cisco Networking."
+  },
+  {
+    id: "contact",
+    text:
+      "Contact email is patranikita@gmail.com. LinkedIn: linkedin.com/in/nikita-patra-13a67a220 and GitHub: github.com/Nikkyzzzz."
+  }
+];
+
+function retrieveResumeChunks(query, limit) {
+  const queryTokens = tokenize(query);
+  if (!queryTokens.length) return [];
+
+  const scored = RESUME_CHUNKS.map((chunk) => {
+    const chunkTokens = tokenize(chunk.text + " " + chunk.id);
+    let score = 0;
+    for (const token of queryTokens) {
+      if (chunkTokens.has(token)) score += 1;
+    }
+    return { chunk, score };
+  })
+    .filter((item) => item.score > 0)
+    .sort((a, b) => b.score - a.score)
+    .slice(0, limit)
+    .map((item) => item.chunk);
+
+  return scored;
+}
+
+function tokenize(text) {
+  const tokens = String(text)
+    .toLowerCase()
+    .replace(/[^a-z0-9\s]/g, " ")
+    .split(/\s+/)
+    .filter((token) => token.length > 1);
+  return new Set(tokens);
+}
+
+function formatResumeContext(chunks) {
+  return chunks.map((chunk) => `- [${chunk.id}] ${chunk.text}`).join("\n");
 }
 
 function normalizeOrigin(value) {
