@@ -159,21 +159,58 @@ const RESUME_CHUNKS = [
 ];
 
 function retrieveResumeChunks(query, limit) {
+  const queryLower = query.toLowerCase();
   const queryTokens = tokenize(query);
   if (!queryTokens.length) return [];
+
+  // Keyword mappings for intent recognition
+  const isAboutExperience = /work|company|experience|job|intern|capitall/i.test(query);
+  const isAboutProjects = /project|build|built|develop|developed|audit|pan|lung/i.test(query);
+  const isAboutSkills = /skill|language|framework|technology|python|llm|rag|ai|ml|tool/i.test(query);
+  const isAboutEducation = /education|study|degree|university|bachelor|school|graduated/i.test(query);
+  const isAboutContact = /contact|email|phone|linkedin|github|reach|connect/i.test(query);
+  const isGeneral = /tell|something|about|who|biography|resume|overview/i.test(query);
 
   const scored = RESUME_CHUNKS.map((chunk) => {
     const chunkTokens = tokenize(chunk.text + " " + chunk.id);
     let score = 0;
+
+    // Exact token matching
     for (const token of queryTokens) {
-      if (chunkTokens.has(token)) score += 1;
+      if (chunkTokens.has(token)) score += 2;
     }
+
+    // Intent-based scoring: boost relevant chunks
+    if (isAboutExperience && chunk.id.includes("experience")) score += 10;
+    if (isAboutExperience && chunk.id.includes("capitall")) score += 15;
+    if (isAboutProjects && chunk.id.includes("project")) score += 10;
+    if (isAboutSkills && chunk.id.includes("skill")) score += 10;
+    if (isAboutEducation && chunk.id.includes("education")) score += 10;
+    if (isAboutContact && chunk.id.includes("contact")) score += 10;
+    if (isGeneral) {
+      // For generic questions, prioritize summary and experience
+      if (chunk.id === "summary") score += 8;
+      if (chunk.id === "work_experience") score += 7;
+    }
+
+    // Keyword relevance inside chunk text
+    const relevantKeywords = ["capitall", "ai", "ml", "engineer", "project", "skill", "python", "rag", "deep", "learning"];
+    for (const keyword of relevantKeywords) {
+      if (chunk.text.toLowerCase().includes(keyword) && queryLower.includes(keyword)) {
+        score += 3;
+      }
+    }
+
     return { chunk, score };
   })
-    .filter((item) => item.score > 0)
     .sort((a, b) => b.score - a.score)
     .slice(0, limit)
     .map((item) => item.chunk);
+
+  // Fallback: if no results, return summary + experience
+  if (scored.length === 0) {
+    return RESUME_CHUNKS.filter(c => c.id === "summary" || c.id === "work_experience").slice(0, limit);
+  }
 
   return scored;
 }
