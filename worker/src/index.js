@@ -50,6 +50,8 @@ export default {
         { role: "user", content: message }
       ];
 
+      const model = env.COHERE_MODEL || "command-r";
+
       const cohereResponse = await fetch("https://api.cohere.com/v2/chat", {
         method: "POST",
         headers: {
@@ -57,7 +59,7 @@ export default {
           Authorization: `Bearer ${env.COHERE_API_KEY}`
         },
         body: JSON.stringify({
-          model: "command-r-plus",
+          model,
           messages,
           temperature: 0.4
         })
