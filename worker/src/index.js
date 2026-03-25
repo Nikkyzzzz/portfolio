@@ -99,62 +99,62 @@ const RESUME_CHUNKS = [
   {
     id: "summary",
     text:
-      "Nikita Patra is an AI/ML Engineer focused on LLM workflows, RAG pipelines, and automation systems."
+      "Nikita Patra is an AI/ML Engineer specializing in machine learning, deep learning, and LLM-powered applications. Experienced in building Retrieval-Augmented Generation (RAG) systems, AI automation pipelines, and deploying AI applications using Python, LangChain, FastAPI, and modern AI platforms."
   },
   {
-    id: "experience_main",
+    id: "education",
     text:
-      "AI/ML Engineer Intern at Capitall (NOT Google). At Capitall, Nikita built 25+ AI bots, processed 500K+ records, and reduced audit time by 60%."
+      "Bachelor of Technology in Computer Science with AI & ML specialization. Studied at Dr. A.P.J. Abdul Kalam Technical University, Uttar Pradesh, India from Aug 2021 to Jul 2025. SGPA: 7.5"
   },
   {
-    id: "experience_capitall",
+    id: "work_experience",
     text:
-      "Current and primary work experience is at Capitall, an AI-focused company where Nikita worked as an AI/ML Engineer building automation systems."
+      "AI/ML Engineer Intern at Capitall (Apr 2025 – Nov 2025). Built 25+ AI-powered audit automation bots for financial auditing and GRC workflows. Processed 500K+ financial records with 99.9% data integrity. Developed RAG pipelines using OpenAI and Cohere APIs with LangChain to automate financial audit report generation. Reduced manual audit processing time by 60%."
   },
   {
-    id: "experience_ltm",
+    id: "project_audit_automation",
     text:
-      "Resume mentions experience with Capitall and LTM in AI-focused project execution and collaboration."
+      "Audit Automation Platform at Tata Communications: Developed a Streamlit-based audit automation platform using Python and Pandas to analyze Procure-to-Pay (P2P), Order-to-Cash (O2C), and Hire-to-Retire (H2R) workflows with rule-based anomaly detection for vendor KYC issues, PO–GRN–Invoice mismatches, split orders, and overdue deliveries, generating automated Excel audit reports."
   },
   {
-    id: "project_audit",
+    id: "project_pan_card_reader",
     text:
-      "Project: Audit Automation Platform at Capitall, an AI-powered audit system with anomaly detection and workflow automation."
+      "PAN Card Reader project for CIFL: Built an OCR-based document processing system using Tesseract and OpenAI APIs to extract structured PAN card information with a Streamlit interface for real-time document upload and automated verification."
   },
   {
-    id: "project_pan",
+    id: "project_lung_cancer",
     text:
-      "Project: PAN Card Reader using OCR plus LLM-based extraction and validation of PAN details."
-  },
-  {
-    id: "project_lung",
-    text:
-      "Project: Lung Cancer Detection using Vision Transformer and CCT model with around 94% accuracy."
+      "Lung Cancer Detection: Developed Vision Transformer (ViT) and Compact Convolutional Transformer (CCT) models using PyTorch for lung cancer image classification, achieving 94% accuracy across three classes."
   },
   {
     id: "skills_programming",
     text:
-      "Programming skills include Python, SQL, and JavaScript."
+      "Programming languages: Python, SQL, JavaScript. Data libraries: Pandas, NumPy, Polars, SciPy, Statsmodels."
   },
   {
-    id: "skills_ai",
+    id: "skills_ai_ml",
     text:
-      "AI/ML skills include machine learning, deep learning, NLP, transformers, LLMs, and RAG."
+      "AI/ML expertise: Machine Learning, Deep Learning, NLP, Transformers, LLMs, RAG (Retrieval-Augmented Generation), Prompt Engineering, Embeddings."
   },
   {
     id: "skills_frameworks",
     text:
-      "Frameworks include PyTorch, Scikit-learn, LangChain, and FastAPI."
+      "Frameworks and libraries: PyTorch, Scikit-learn, LangChain, Flask, FastAPI, Streamlit, OpenAI GPT, Mistral, Cohere, Ollama, HuggingFace."
   },
   {
-    id: "skills_tools",
+    id: "skills_deployment",
     text:
-      "Tools include Docker, Git, and Streamlit."
+      "Deployment and tools: REST APIs, Docker, Uvicorn, Git, Jupyter Notebook, Google Colab, VS Code."
+  },
+  {
+    id: "certifications",
+    text:
+      "Certifications: Cisco Networking Academy – Networking Basics, IBM SkillsBuild – AI Fundamentals, IBM SkillsBuild – Data Analytics Fundamentals, Python for Data Science and AI, Machine Learning Foundations."
   },
   {
     id: "contact",
     text:
-      "Contact email is patranikita@gmail.com. LinkedIn: linkedin.com/in/nikita-patra-13a67a220 and GitHub: github.com/Nikkyzzzz."
+      "Contact: Phone +91 7042445338, Email patranikita236@gmail.com, LinkedIn linkedin.com/in/nikita-patra-13a67a220, GitHub github.com/Nikkyzzzz"
   }
 ];
 
