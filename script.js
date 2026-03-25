@@ -14,7 +14,9 @@ const PORTFOLIO_CONFIG = {
     formspreeEndpoint: runtimeConfig.FORMSPREE_ENDPOINT || ""
   },
   ai: {
-    endpoint: runtimeConfig.CHAT_API_URL || ""
+    endpoint:
+      runtimeConfig.CHAT_API_URL ||
+      "https://nikita-portfolio-chat-proxy.patranikita236.workers.dev/api/chat"
   }
 };
 
@@ -384,7 +386,7 @@ async function initAssistantWidget() {
   if (!form || !input || !messages || !clearButton) return;
 
   const history = [];
-  const chatApiUrl = PORTFOLIO_CONFIG.ai.endpoint;
+  const chatApiUrl = (PORTFOLIO_CONFIG.ai.endpoint || "").trim();
 
   const addMessage = (role, text) => {
     const item = document.createElement("div");
@@ -397,7 +399,9 @@ async function initAssistantWidget() {
   addMessage("bot", "Hello, I am your AI assistant. Ask me anything about Nikita's portfolio.");
 
   if (!chatApiUrl) {
-    addMessage("bot", "Chat API URL not configured. Using local assistant mode.");
+    addMessage("bot", "Live API unavailable. Using local assistant mode.");
+  } else {
+    addMessage("bot", "Live AI mode enabled.");
   }
 
   clearButton.addEventListener("click", () => {
