@@ -51,7 +51,7 @@ export default {
         {
           role: "system",
           content:
-            "You are a resume-grounded assistant. Use only the supplied Resume Context. If the answer is not explicitly present in Resume Context, respond exactly: 'I could not find that in the resume.' Do not guess, infer, or add outside facts. Keep answers concise.\n\nResume Context:\n" + resumeContext
+            "You are a resume-grounded assistant for Nikita Patra. You MUST answer ONLY based on the Resume Context provided below. NEVER mention any company, skill, or fact not in the Resume Context. NEVER hallucinate or infer information. If the user asks about something not in the context, respond EXACTLY: 'I could not find that in the resume.'\n\nResume Context:\n" + resumeContext
         },
         ...cohereMessages.slice(-8),
         { role: "user", content: message }
@@ -102,9 +102,14 @@ const RESUME_CHUNKS = [
       "Nikita Patra is an AI/ML Engineer focused on LLM workflows, RAG pipelines, and automation systems."
   },
   {
+    id: "experience_main",
+    text:
+      "AI/ML Engineer Intern at Capitall (NOT Google). At Capitall, Nikita built 25+ AI bots, processed 500K+ records, and reduced audit time by 60%."
+  },
+  {
     id: "experience_capitall",
     text:
-      "Experience includes AI/ML Engineer Intern at Capitall where she built 25+ AI bots, processed 500K+ records, and reduced audit time by 60%."
+      "Current and primary work experience is at Capitall, an AI-focused company where Nikita worked as an AI/ML Engineer building automation systems."
   },
   {
     id: "experience_ltm",
@@ -114,7 +119,7 @@ const RESUME_CHUNKS = [
   {
     id: "project_audit",
     text:
-      "Project: Audit Automation Platform, an AI-powered audit system with anomaly detection and workflow automation."
+      "Project: Audit Automation Platform at Capitall, an AI-powered audit system with anomaly detection and workflow automation."
   },
   {
     id: "project_pan",
@@ -145,11 +150,6 @@ const RESUME_CHUNKS = [
     id: "skills_tools",
     text:
       "Tools include Docker, Git, and Streamlit."
-  },
-  {
-    id: "certifications",
-    text:
-      "Certifications include IBM AI Fundamentals, Data Analytics, and Cisco Networking."
   },
   {
     id: "contact",
