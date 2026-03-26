@@ -13,6 +13,13 @@
   --field-border: rgba(100, 130, 180, 0.35);
   --field-text: #ecf3ff;
   --field-placeholder: #7e91b5;
+  --chip-bg: rgba(9, 17, 32, 0.72);
+  --chip-text: #ecf3ff;
+  --scroll-top-bg: rgba(8, 16, 34, 0.88);
+  --scroll-top-text: #ecf3ff;
+  --scroll-top-border: rgba(0, 209, 255, 0.52);
+  --scroll-top-shadow: 0 8px 16px rgba(0, 12, 30, 0.45);
+  --scroll-top-shadow-hover: 0 10px 20px rgba(0, 14, 34, 0.52), 0 0 14px rgba(0, 209, 255, 0.34);
   --shadow-glow: 0 0 30px rgba(47, 128, 255, 0.22);
   --radius: 18px;
 }
@@ -32,6 +39,13 @@
   --field-border: rgba(79, 129, 214, 0.35);
   --field-text: #1a2340;
   --field-placeholder: #6e80a6;
+  --chip-bg: rgba(196, 217, 250, 0.96);
+  --chip-text: #1a2c56;
+  --scroll-top-bg: rgba(230, 238, 255, 0.96);
+  --scroll-top-text: #1a2c56;
+  --scroll-top-border: rgba(71, 130, 220, 0.56);
+  --scroll-top-shadow: 0 10px 20px rgba(76, 117, 186, 0.24);
+  --scroll-top-shadow-hover: 0 12px 24px rgba(70, 113, 184, 0.28), 0 0 14px rgba(71, 130, 220, 0.25);
   --shadow-glow: 0 12px 40px rgba(13, 99, 248, 0.2);
 }
 
@@ -433,11 +447,11 @@ h2 {
 
 .chip-wrap span {
   border: 1px solid var(--border-glow);
-  color: var(--text-main);
+  color: var(--chip-text);
   padding: 6px 10px;
   border-radius: 999px;
   font-size: 0.82rem;
-  background: rgba(9, 17, 32, 0.72);
+  background: var(--chip-bg);
 }
 
 .project-grid {
@@ -802,6 +816,38 @@ textarea:focus {
   transform: translateY(18px) scale(0.96);
 }
 
+.scroll-top-btn {
+  position: fixed;
+  right: 24px;
+  bottom: 88px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid var(--scroll-top-border);
+  background: var(--scroll-top-bg);
+  color: var(--scroll-top-text);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 158;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(14px) scale(0.92);
+  transition: opacity 0.22s ease, transform 0.22s ease, box-shadow 0.22s ease;
+  box-shadow: var(--scroll-top-shadow);
+}
+
+.scroll-top-btn.show {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0) scale(1);
+}
+
+.scroll-top-btn:hover {
+  box-shadow: var(--scroll-top-shadow-hover);
+}
+
 @keyframes fabPulse {
   0%,
   100% {
@@ -896,6 +942,11 @@ textarea:focus {
 
   .assistant-fab span {
     display: none;
+  }
+
+  .scroll-top-btn {
+    right: 20px;
+    bottom: 82px;
   }
 }
 

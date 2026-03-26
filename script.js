@@ -544,6 +544,23 @@ function initAssistantFloatingButton() {
   });
 }
 
+function initScrollTopButton() {
+  const button = document.getElementById("scrollTopBtn");
+  if (!button) return;
+
+  const toggleVisibility = () => {
+    const shouldShow = window.scrollY > 280;
+    button.classList.toggle("show", shouldShow);
+  };
+
+  button.addEventListener("click", () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+
+  window.addEventListener("scroll", toggleVisibility, { passive: true });
+  toggleVisibility();
+}
+
 runTypingEffect();
 initExternalLinks();
 initRevealAnimations();
@@ -558,3 +575,4 @@ initAssistantWidget();
 initHeroEntranceSequence();
 initPortraitTilt();
 initAssistantFloatingButton();
+initScrollTopButton();
