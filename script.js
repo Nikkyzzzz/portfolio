@@ -22,7 +22,6 @@ const PORTFOLIO_CONFIG = {
 
 const typingPhrases = [
   "AI Engineer",
-  "ML Developer",
   "GenAI Enthusiast"
 ];
 
@@ -498,6 +497,53 @@ function initPortraitTilt() {
   });
 }
 
+function initAssistantFloatingButton() {
+  const fab = document.getElementById("assistantFab");
+  const popup = document.getElementById("assistantPopup");
+  const backdrop = document.getElementById("assistantBackdrop");
+  const closeBtn = document.getElementById("assistantPopupClose");
+  const assistantInput = document.getElementById("assistantInput");
+  if (!fab || !popup || !backdrop) return;
+
+  const openAssistant = () => {
+    popup.classList.add("open");
+    backdrop.classList.add("open");
+    popup.setAttribute("aria-hidden", "false");
+    backdrop.setAttribute("aria-hidden", "false");
+    fab.setAttribute("aria-label", "Close AI assistant chat");
+    document.body.style.overflow = "hidden";
+    setTimeout(() => {
+      assistantInput?.focus();
+    }, 120);
+  };
+
+  const closeAssistant = () => {
+    popup.classList.remove("open");
+    backdrop.classList.remove("open");
+    popup.setAttribute("aria-hidden", "true");
+    backdrop.setAttribute("aria-hidden", "true");
+    fab.setAttribute("aria-label", "Open AI assistant chat");
+    document.body.style.overflow = "";
+  };
+
+  const toggleAssistant = () => {
+    if (popup.classList.contains("open")) {
+      closeAssistant();
+      return;
+    }
+    openAssistant();
+  };
+
+  fab.addEventListener("click", toggleAssistant);
+  closeBtn?.addEventListener("click", closeAssistant);
+  backdrop.addEventListener("click", closeAssistant);
+  window.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && popup.classList.contains("open")) {
+      closeAssistant();
+    }
+  });
+}
+
 runTypingEffect();
 initExternalLinks();
 initRevealAnimations();
@@ -511,3 +557,4 @@ initContactForm();
 initAssistantWidget();
 initHeroEntranceSequence();
 initPortraitTilt();
+initAssistantFloatingButton();
