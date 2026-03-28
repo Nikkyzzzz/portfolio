@@ -7,8 +7,10 @@ const PORTFOLIO_CONFIG = {
   },
   projectRepos: {
     audit: runtimeConfig.PROJECT_AUDIT_URL || "",
-    pan: runtimeConfig.PROJECT_PAN_URL || "",
-    lung: runtimeConfig.PROJECT_LUNG_URL || ""
+    pan: runtimeConfig.PROJECT_PAN_URL || "https://pan-card-reader.onrender.com",
+    panGithub: runtimeConfig.PROJECT_PAN_GITHUB_URL || "https://github.com/Nikkyzzzz/PAN-Card-Reader",
+    lung: runtimeConfig.PROJECT_LUNG_URL || "https://lung-cancer-predictionvitcvt.streamlit.app/",
+    lungGithub: runtimeConfig.PROJECT_LUNG_GITHUB_URL || "https://github.com/dylan-govender/lung-cancer-detection"
   },
   contact: {
     formspreeEndpoint: runtimeConfig.FORMSPREE_ENDPOINT || ""

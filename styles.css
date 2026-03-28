@@ -955,3 +955,24 @@ textarea:focus {
     animation: none;
   }
 }
+
+/* Project action buttons hover glow */
+.project-actions .btn {
+  transition: transform 0.2s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.project-actions .btn:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 0 12px rgba(0, 212, 255, 0.45),
+    0 0 28px rgba(0, 212, 255, 0.25);
+  border-color: rgba(0, 212, 255, 0.7);
+}
+
+/* Slightly distinct glow for ghost-style buttons (GitHub) */
+.project-actions .btn.btn-ghost:hover {
+  box-shadow:
+    0 0 10px rgba(88, 166, 255, 0.45),
+    0 0 24px rgba(88, 166, 255, 0.25);
+  border-color: rgba(88, 166, 255, 0.75);
+}
