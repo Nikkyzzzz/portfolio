@@ -976,3 +976,19 @@ textarea:focus {
     0 0 24px rgba(88, 166, 255, 0.25);
   border-color: rgba(88, 166, 255, 0.75);
 }
+
+/* Pop up card effect for project, skill, and experience cards */
+.project-card,
+.skill-card,
+.timeline-item {
+  transition: transform 0.35s cubic-bezier(.22,1,.36,1), box-shadow 0.35s cubic-bezier(.22,1,.36,1);
+  will-change: transform, box-shadow;
+}
+
+.project-card:hover,
+.skill-card:hover,
+.timeline-item:hover {
+  transform: translateY(-12px) scale(1.045) perspective(800px) rotateX(3deg);
+  box-shadow: 0 18px 48px rgba(0,209,255,0.22), 0 2px 24px rgba(141,91,255,0.13);
+  z-index: 2;
+}
