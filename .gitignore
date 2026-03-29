@@ -1,0 +1,7 @@
+.env
+secrets.toml
+node_modules/
+worker/.dev.vars
+worker/node_modules/
+*.pdf
+resume_text.txt
