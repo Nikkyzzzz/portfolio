@@ -1,0 +1,24 @@
+{
+  "name": "portfolio",
+  "version": "1.0.0",
+  "description": "",
+  "main": "config.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Nikkyzzzz/portfolio.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Nikkyzzzz/portfolio/issues"
+  },
+  "homepage": "https://github.com/Nikkyzzzz/portfolio#readme",
+  "dependencies": {
+    "@coreui/icons": "^3.0.1"
+  }
+}

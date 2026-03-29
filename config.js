@@ -5,5 +5,8 @@ window.RUNTIME_CONFIG = {
   PROJECT_PAN_URL: "",
   PROJECT_LUNG_URL: "",
   FORMSPREE_ENDPOINT: "",
-  CHAT_API_URL: "https://nikita-portfolio-chat-proxy.patranikita236.workers.dev/api/chat"
+  CHAT_API_URL: "https://nikita-portfolio-chat-proxy.patranikita236.workers.dev/api/chat",
+  EMAILJS_SERVICE_ID: "service_k79dfdw",
+  EMAILJS_TEMPLATE_ID: "template_o974j4u",
+  EMAILJS_PUBLIC_KEY: "xCvVViePpb88D9vrC"
 };

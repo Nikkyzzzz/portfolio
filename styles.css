@@ -409,6 +409,22 @@ h2 {
   margin-bottom: 10px;
 }
 
+.cert-card a {
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.cert-card {
+  cursor: pointer;
+}
+
+.cert-card a:hover {
+  color: var(--accent-cyan);
+}
+
 .about-card p,
 .project-card p,
 .timeline-item p,

@@ -14,7 +14,12 @@ const PORTFOLIO_CONFIG = {
     lungGithub: runtimeConfig.PROJECT_LUNG_GITHUB_URL || "https://github.com/dylan-govender/lung-cancer-detection"
   },
   contact: {
-    formspreeEndpoint: runtimeConfig.FORMSPREE_ENDPOINT || ""
+    formspreeEndpoint: runtimeConfig.FORMSPREE_ENDPOINT || "",
+    emailjs: {
+      serviceId: runtimeConfig.EMAILJS_SERVICE_ID || "",
+      templateId: runtimeConfig.EMAILJS_TEMPLATE_ID || "",
+      publicKey: runtimeConfig.EMAILJS_PUBLIC_KEY || ""
+    }
   },
   ai: {
     endpoint:
@@ -311,7 +316,7 @@ function initContactForm() {
   const form = document.getElementById("contactForm");
   if (!form) return;
   const status = document.getElementById("contactStatus");
-  const endpoint = PORTFOLIO_CONFIG.contact.formspreeEndpoint;
+  const emailjsConfig = PORTFOLIO_CONFIG.contact.emailjs;
 
   const setStatus = (text, type = "") => {
     if (!status) return;
@@ -324,8 +329,12 @@ function initContactForm() {
     event.preventDefault();
 
     const button = form.querySelector("button[type='submit']");
-    if (!endpoint) {
-      setStatus("Set a Formspree endpoint in script.js to enable real email delivery.", "error");
+    const emailField = form.querySelector("#email");
+    const nameField = form.querySelector("#name");
+    const messageField = form.querySelector("#message");
+
+    if (!emailjsConfig.serviceId || !emailjsConfig.templateId || !emailjsConfig.publicKey) {
+      setStatus("Email service not configured. Please contact directly at patranikita@gmail.com", "error");
       return;
     }
 
@@ -335,23 +344,25 @@ function initContactForm() {
     }
 
     try {
-      const formData = new FormData(form);
-      const response = await fetch(endpoint, {
-        method: "POST",
-        body: formData,
-        headers: {
-          Accept: "application/json"
-        }
-      });
+      const templateParams = {
+        from_name: nameField?.value || "",
+        from_email: emailField?.value || "",
+        message: messageField?.value || "",
+        to_name: "Nikita Patra"
+      };
 
-      if (!response.ok) {
-        throw new Error("Form submission failed");
-      }
+      await emailjs.send(
+        emailjsConfig.serviceId,
+        emailjsConfig.templateId,
+        templateParams,
+        emailjsConfig.publicKey
+      );
 
       form.reset();
       setStatus("Message sent successfully. I will get back to you soon.", "success");
     } catch (error) {
-      setStatus("Unable to send message right now. Please try again.", "error");
+      console.error("EmailJS error:", error);
+      setStatus("Unable to send message right now. Please try again or email directly at patranikita@gmail.com", "error");
     } finally {
       if (button) {
         button.textContent = "Send Message";
@@ -374,7 +385,7 @@ function getLocalAssistantReply(prompt) {
     return "At Capitall, Nikita built 25+ AI bots, processed 500K+ records, and reduced audit time by 60%.";
   }
   if (normalized.includes("contact") || normalized.includes("email")) {
-    return "You can reach out at patranikita@gmail.com.";
+    return "You can reach Nikita via the contact form on this page or email at patranikita@gmail.com.";
   }
 
   return "I can answer about projects, skills, experience, certifications, and how to contact Nikita.";
@@ -563,6 +574,14 @@ function initScrollTopButton() {
   window.addEventListener("scroll", toggleVisibility, { passive: true });
   toggleVisibility();
 }
+
+// Initialize EmailJS
+(function() {
+  const emailjsConfig = PORTFOLIO_CONFIG.contact.emailjs;
+  if (emailjsConfig.publicKey && typeof emailjs !== 'undefined') {
+    emailjs.init(emailjsConfig.publicKey);
+  }
+})();
 
 runTypingEffect();
 initExternalLinks();
