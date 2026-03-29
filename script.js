@@ -321,22 +321,25 @@ function initContactForm() {
   const setStatus = (text, type = "") => {
     if (!status) return;
     status.textContent = text;
-    status.classList.remove("success", "error");
+    status.className = "contact-status";
     if (type) status.classList.add(type);
   };
 
+  if (!emailjsConfig.publicKey) {
+    setStatus("Email service not configured.", "error");
+    return;
+  }
+
+  if (typeof emailjs !== 'undefined') {
+    emailjs.init(emailjsConfig.publicKey);
+  }
+
   form.addEventListener("submit", async (event) => {
     event.preventDefault();
-
     const button = form.querySelector("button[type='submit']");
-    const emailField = form.querySelector("#email");
     const nameField = form.querySelector("#name");
+    const emailField = form.querySelector("#email");
     const messageField = form.querySelector("#message");
-
-    if (!emailjsConfig.serviceId || !emailjsConfig.templateId || !emailjsConfig.publicKey) {
-      setStatus("Email service not configured. Please contact directly at patranikita@gmail.com", "error");
-      return;
-    }
 
     if (button) {
       button.textContent = "Sending...";
@@ -347,22 +350,20 @@ function initContactForm() {
       const templateParams = {
         from_name: nameField?.value || "",
         from_email: emailField?.value || "",
-        message: messageField?.value || "",
-        to_name: "Nikita Patra"
+        message: messageField?.value || ""
       };
 
-      await emailjs.send(
+      const response = await emailjs.send(
         emailjsConfig.serviceId,
         emailjsConfig.templateId,
-        templateParams,
-        emailjsConfig.publicKey
+        templateParams
       );
 
       form.reset();
-      setStatus("Message sent successfully. I will get back to you soon.", "success");
+      setStatus("Message sent successfully! I will get back to you soon.", "success");
     } catch (error) {
-      console.error("EmailJS error:", error);
-      setStatus("Unable to send message right now. Please try again or email directly at patranikita@gmail.com", "error");
+      console.error("EmailJS Error:", error);
+      setStatus("Failed to send. Please email directly at patranikita@gmail.com", "error");
     } finally {
       if (button) {
         button.textContent = "Send Message";
@@ -574,14 +575,6 @@ function initScrollTopButton() {
   window.addEventListener("scroll", toggleVisibility, { passive: true });
   toggleVisibility();
 }
-
-// Initialize EmailJS
-(function() {
-  const emailjsConfig = PORTFOLIO_CONFIG.contact.emailjs;
-  if (emailjsConfig.publicKey && typeof emailjs !== 'undefined') {
-    emailjs.init(emailjsConfig.publicKey);
-  }
-})();
 
 runTypingEffect();
 initExternalLinks();
