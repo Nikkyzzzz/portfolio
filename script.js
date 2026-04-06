@@ -10,7 +10,7 @@ const PORTFOLIO_CONFIG = {
     auditGithub: runtimeConfig.PROJECT_AUDIT_GITHUB_URL || "https://github.com/Nikkyzzzz/Bank-Statement-Extractor",
     pan: runtimeConfig.PROJECT_PAN_URL || "https://pan-card-reader.onrender.com",
     panGithub: runtimeConfig.PROJECT_PAN_GITHUB_URL || "https://github.com/Nikkyzzzz/PAN-Card-Reader",
-    lung: runtimeConfig.PROJECT_LUNG_URL || "https://lung-cancer-predictionvitcvt.streamlit.app/",
+    lung: runtimeConfig.PROJECT_LUNG_URL || "https://huggingface.co/spaces/nikitapatra236/Lungvit",
     lungGithub: runtimeConfig.PROJECT_LUNG_GITHUB_URL || "https://github.com/dylan-govender/lung-cancer-detection"
   },
   contact: {
